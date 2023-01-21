@@ -1,3 +1,4 @@
+
 from azure.cognitiveservices.speech.audio import AudioOutputConfig
 import os
 import azure.cognitiveservices.speech as speechsdk
