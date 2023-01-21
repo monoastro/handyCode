@@ -99,11 +99,11 @@ int main()
     input[i] = Input[whichDataSet][i];
   } */
 
-  double input[];
+  double input[] = {1};
   std::cout<<"Enter input\n";
   std::cin>>input[0];
   
-  InputToOutput(input[]);
+  InputToOutput(input);
 /*   std::cout<<"Actual Output: ";
   for(i = 0; i<OutputNodes; i++)
   {
