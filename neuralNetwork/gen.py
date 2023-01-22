@@ -6,4 +6,17 @@ def gen(arr,step,n):
 
 
 
-print(gen([5,5,5,5,5,5,5],3,2))
+ret = (gen([0.03, 0.98, 0.10, 1.00, 0.78, 0.90, 0.97, 0.34, 0.98], 0.01,2))
+y = []
+for i in range(5):
+    x = []
+    for j in range(9):
+        x.append(float("{:.2f}".format(ret[j][i])))
+    y.append(x)
+
+for x in y:
+    print(x, end=',\n')
+
+
+
+

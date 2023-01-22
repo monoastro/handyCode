@@ -1,5 +1,8 @@
 # handyCode
 
+# Speech Recognition
+azure-cognitiveservices-speech
+
 # Arduino Weight Trainer (AWT)
 
 You'll need the following packages

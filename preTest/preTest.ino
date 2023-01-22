@@ -7,6 +7,7 @@ void setup()
 void loop() {
   // put your main code here, to run repeatedly:
   double TestInput[9];
+  
     //raw inputs go here
     //take analog inputs from a0 to a8
     int tem;
