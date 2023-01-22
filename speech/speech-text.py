@@ -37,6 +37,7 @@ def recognize_from_microphone():
 
 
 def synthesize_to_speaker():
+    print("Hello")
     # Find your key and resource region under the 'Keys and Endpoint' tab in your Speech resource in Azure Portal
     # Remember to delete the brackets <> when pasting your key and region!
     speech_config = speechsdk.SpeechConfig(
@@ -49,5 +50,5 @@ def synthesize_to_speaker():
     synthesizer.speak_text_async("Enter some text to synthesize.")
 
 
-# synthesize_to_speaker()
+#synthesize_to_speaker()
 recognize_from_microphone()
