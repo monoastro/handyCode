@@ -18,7 +18,7 @@ x=serial.Serial(BT,9600,timeout=1)
 #     def setPlayed(self,x):
 #         self.played=x
 
-signs=['A','E','I','O','U','my','hello', 'world','i love you','good morning']
+signs=['hello','A','E','I','O','U','my','name is', 'bibek','love electronics','sudip']
 
 # signObjs=[Sign(s) for s in signs]
 
