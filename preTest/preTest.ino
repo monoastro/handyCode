@@ -24,6 +24,7 @@ void loop() {
     tem = analogRead(A5);
     tem = map(tem, 650, 870, 0, 100);
     tem = constrain(tem, 0, 100);
+    
     TestInput[5] = double(tem)/100;
 
     //middle finger
@@ -34,7 +35,7 @@ void loop() {
     TestInput[1] = double(tem)/100;
     //[1]
     tem = analogRead(A6);
-    tem = map(tem, 650, 870, 0, 100);
+    tem = map(tem, 630, 880, 0, 100);
     tem = constrain(tem, 0, 100);
     TestInput[6] = double(tem)/100;
 
@@ -65,7 +66,7 @@ void loop() {
     //thumb - opposite because the magnet is on the other side
     // [0]
     tem = analogRead(A4);
-    tem = map(tem, 350, 420, 100, 0);
+    tem = map(tem, 520, 750, 0, 100);
     tem = constrain(tem, 0, 100);
     TestInput[4] = double(tem)/100;
 
