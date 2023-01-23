@@ -4,10 +4,6 @@
 
 //#define DEBUG/
 
-/******************************************************************
-   Network Configuration - customized per network
-*******************************************************************/
-
 const int numberOfDataSet = 2; 
 const int inputNodes = 9;
 const int hiddenNodes = inputNodes+10;
@@ -26,10 +22,6 @@ const double Target[numberOfDataSet][outputNodes] =
   {0,0,0,0,0,0,0,0,0},
   {1,1,1,1,1,1,1,1,1}
 };
-
-/******************************************************************
-   End Network Configuration
-*******************************************************************/
 
 int i, j, p;
 double Accum;
@@ -66,8 +58,7 @@ void driveNN()
     double TestInput[inputNodes];
     //raw inputs go here
     //take analog inputs from a0 to a8
-   
-    int q = 0, w = 0, e = 0, r = 0;
+  
 
     int tem;
 
@@ -78,8 +69,6 @@ void driveNN()
     tem = analogRead(A0);
     tem = map(tem, 460, 850, 0, 100);
     tem = constrain(tem, 0, 100);
-    if(tem>0.7) q = 1;
-
     TestInput[0] = double(tem)/100;
   //{1}
     tem = analogRead(A5);
@@ -95,12 +84,10 @@ void driveNN()
     tem = analogRead(A1); 
     tem = map(tem, 350, 870, 0, 100);
     tem = constrain(tem, 0, 100);\
-    if(tem>0.8) w = 1;
     TestInput[1] = double(tem)/100;
   
     //[1]
     tem = analogRead(A6);
-  
     tem = map(tem, 650, 870, 0, 100);
     tem = constrain(tem, 0, 100);
     TestInput[6] = double(tem)/100;
@@ -110,7 +97,6 @@ void driveNN()
     tem = analogRead(A2);
     tem = map(tem, 530, 870, 0, 100);
     tem = constrain(tem, 0, 100);
-    if(tem>0.8) e = 1;
     TestInput[2] = double(tem)/100;
     //[1]
     tem = analogRead(A7);
@@ -125,8 +111,7 @@ void driveNN()
     tem = map(tem, 300, 770, 0, 100);
     tem = constrain(tem, 0, 100);
     TestInput[3] = double(tem)/100;
-    if(tem>0.8) r = 1;
-    
+
     //[1]
     tem = analogRead(A8);
     tem = map(tem, 570, 870, 0, 100);
@@ -153,12 +138,6 @@ void driveNN()
   
     InputToOutput(TestInput); //INPUT to the function to obtain OUTPUT
 
-
-
-
-
-
-
     
     int bin = 0;
     int decValue = 0;
@@ -169,12 +148,12 @@ void driveNN()
  
         decValue += bin * base;
         base = base/ 2;
-//    /Serial.print(Output[i] > 0.5 ? 1: 0);
+//    Serial.print(Output[i] > 0.5 ? 1: 0);
 //    Serial.print(":");
     }
     
     Serial.println(decValue);
-delay(200);
+    delay(200);
 //  Serial.println();/
   }
 }

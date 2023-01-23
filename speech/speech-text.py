@@ -9,7 +9,6 @@ SPEECH_REGION = "southeastasia"
 
 
 def recognize_from_microphone():
-    # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
     speech_config = speechsdk.SpeechConfig(
         subscription=SPEECH_KEY, region=SPEECH_REGION)
     speech_config.speech_recognition_language = "en-US"
@@ -18,7 +17,6 @@ def recognize_from_microphone():
     speech_recognizer = speechsdk.SpeechRecognizer(
         speech_config=speech_config, audio_config=audio_config)
 
-    print("Speak into your microphone.")
     speech_recognition_result = speech_recognizer.recognize_once_async().get()
 
     if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
@@ -38,12 +36,8 @@ def recognize_from_microphone():
 
 def synthesize_to_speaker():
     print("Hello")
-    # Find your key and resource region under the 'Keys and Endpoint' tab in your Speech resource in Azure Portal
-    # Remember to delete the brackets <> when pasting your key and region!
     speech_config = speechsdk.SpeechConfig(
         subscription=SPEECH_KEY, region=SPEECH_REGION)
-    # In this sample we are using the default speaker
-    # Learn how to customize your speaker using SSML in Azure Cognitive Services Speech documentation
     audio_config = AudioOutputConfig(use_default_speaker=True)
     synthesizer = speechsdk.SpeechSynthesizer(
         speech_config=speech_config, audio_config=audio_config)
@@ -51,4 +45,7 @@ def synthesize_to_speaker():
 
 
 #synthesize_to_speaker()
-recognize_from_microphone()
+
+print("Speak into your microphone.")
+while(1):
+    recognize_from_microphone()

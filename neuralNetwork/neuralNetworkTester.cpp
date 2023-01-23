@@ -5,9 +5,7 @@
 #include <math.h>
 #include <random>
 
-/******************************************************************
-   Network Configuration - customized per network
-*******************************************************************/
+//Network Configuration - customized per network
 
 const int PatternCount = 2;
 const int InputNodes = 9;
@@ -30,9 +28,7 @@ const double Target[PatternCount][OutputNodes] =
   {1,1,1,1,1,1,1,1,1}
 };
 
-/******************************************************************
-   End Network Configuration
-*******************************************************************/
+//End Network Configuration
 
 unsigned i, j; //arduino code relic; just ignore these two 
 double Accum;
@@ -47,9 +43,7 @@ double OutputWeights[HiddenNodes + 1][OutputNodes] = {{0.3987823724746704, 0.259
 //the function for which this whole circus is established
 void InputToOutput(double TestInput[])
 {
-  /******************************************************************
-    Compute hidden layer activations
-  ******************************************************************/
+//Compute hidden layer activations
 
   for ( i = 0 ; i < HiddenNodes ; i++ ) 
   {
@@ -61,9 +55,7 @@ void InputToOutput(double TestInput[])
     Hidden[i] = (Accum>0?Accum:0);
   }
 
-  /******************************************************************
-    Compute output layer activations and calculate errors
-  ******************************************************************/
+//Compute output layer activations and calculate errors
 
   for ( i = 0 ; i < OutputNodes ; i++ ) 
   {
@@ -72,7 +64,7 @@ void InputToOutput(double TestInput[])
     {
       Accum += Hidden[j] * OutputWeights[j][i];
     }
-    //linear activation function
+    //ReLu
     Output[i] = (Accum>0?Accum:0);
   }
 

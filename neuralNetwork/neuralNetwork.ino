@@ -5,9 +5,8 @@
 
 #define DEBUG
 
-/******************************************************************
-   Network Configuration - customized per network
-*******************************************************************/
+//   Network Configuration - customized per network
+
 
 const int PatternCount = 16;
 const int InputNodes = 4;
@@ -24,22 +23,22 @@ const float Success = 0.0015;
 //0 is min value of the sensor and 1 is the max value of the sensor
 float Input[PatternCount][InputNodes] = 
 {
-  { 0, 1, 1, 0 },  // LIGHT ON LEFT AND RIGHT
-  { 0, 1, 0, 0 },  // LIGHT ON LEFT
-  { 1, 1, 1, 0 },  // LIGHT ON TOP, LEFT, and RIGHT
-  { 1, 1, 0, 0 },  // LIGHT ON TOP and LEFT
-  { 0, 0, 1, 0 },  // LIGHT ON RIGHT
-  { 1, 0, 0, 0 },  // LIGHT ON TOP
-  { 0, 0, 0, 0 },  // NO LIGHT
-  { 0, 0, 0, 1 },  // LIGHT ON BOTTOM
-  { 0, 1, 0, 1 },  // LIGHT ON BOTTOM AND LEFT
-  { 0, 0, 1, 1 },  // LIGHT ON BOTTOM AND RIGHT
-  { 0, 1, 1, 1 },  // LIGHT ON BOTTOM, LEFT, and RIGHT
-  { 1, 0, 0, 1 },  // LIGHT ON TOP AND BOTTOM
-  { 1, 1, 0, 1 },  // LIGHT ON TOP, BOTTOM, and LEFT
-  { 1, 0, 1, 1 },  // LIGHT ON TOP, BOTTOM, and RIGHT  { 0.65, 0.55 },   
-  { 1, 0, 1, 0 },  // LIGHT ON TOP AND RIGHT
-  { 1, 1, 1, 1 },  // LIGHT ON ALL
+  { 0, 1, 1, 0 },  
+  { 0, 1, 0, 0 },  
+  { 1, 1, 1, 0 }, 
+  { 1, 1, 0, 0 },
+  { 0, 0, 1, 0 },
+  { 1, 0, 0, 0 },
+  { 0, 0, 0, 0 },
+  { 0, 0, 0, 1 },
+  { 0, 1, 0, 1 },
+  { 0, 0, 1, 1 },
+  { 0, 1, 1, 1 },
+  { 1, 0, 0, 1 },
+  { 1, 1, 0, 1 },
+  { 1, 0, 1, 1 },
+  { 1, 0, 1, 0 },
+  { 1, 1, 1, 1 },
 };
 
 const float Target[PatternCount][OutputNodes] = 
@@ -62,9 +61,8 @@ const float Target[PatternCount][OutputNodes] =
   { 0.65, 0.65},
 };
 
-/******************************************************************
-   End Network Configuration
-*******************************************************************/
+//   End Network Configuration
+
 
 int i, j, p, q, r;
 int ReportEvery1000;
@@ -105,9 +103,7 @@ void loop()
 //TRAINS THE NEURAL NETWORK
 void train_nn() 
 {
-  /******************************************************************
-    Initialize HiddenWeights and ChangeHiddenWeights
-  ******************************************************************/
+  //Initialize HiddenWeights and ChangeHiddenWeights
   for ( i = 0 ; i < HiddenNodes ; i++ ) 
   {
     for ( j = 0 ; j <= InputNodes ; j++ ) 
@@ -117,9 +113,8 @@ void train_nn()
       HiddenWeights[j][i] = 2.0 * ( Rando - 0.5 ) * InitialWeightMax ;
     }
   }
-  /******************************************************************
-    Initialize OutputWeights and ChangeOutputWeights
-  ******************************************************************/
+
+  //    Initialize OutputWeights and ChangeOutputWeights
   for ( i = 0 ; i < OutputNodes ; i ++ ) 
   {
     for ( j = 0 ; j <= HiddenNodes ; j++ ) 
@@ -132,15 +127,13 @@ void train_nn()
 
   //Serial.println("Initial/Untrained Outputs: ");
   //toTerminal();
-  /******************************************************************
-    Begin training
-  ******************************************************************/
+  //Begin training
+
 
   for ( TrainingCycle = 1 ; TrainingCycle < 2147483647 ; TrainingCycle++) 
   {
-    /******************************************************************
-      Randomize order of training patterns
-    ******************************************************************/
+    //Randomize order of training patterns
+  
 
     for ( p = 0 ; p < PatternCount ; p++) 
     {
@@ -150,15 +143,13 @@ void train_nn()
       RandomizedIndex[q] = r ;
     }
     Error = 0.0 ;
-    /******************************************************************
-      Cycle through each training pattern in the randomized order
-    ******************************************************************/
+    
+    //Cycle through each training pattern in the randomized order
     for ( q = 0 ; q < PatternCount ; q++ ) 
     {
       p = RandomizedIndex[q];
-      /******************************************************************
-        Compute hidden layer activations
-      ******************************************************************/
+      //Compute hidden layer activations
+    
 
       for ( i = 0 ; i < HiddenNodes ; i++ ) {
         Accum = HiddenWeights[InputNodes][i] ;
@@ -168,9 +159,8 @@ void train_nn()
         Hidden[i] = 1.0 / (1.0 + exp(-Accum)) ; //sigmoid 
       }
 
-      /******************************************************************
-        Compute output layer activations and calculate errors
-      ******************************************************************/
+      //Compute output layer activations and calculate errors
+    
 
       for ( i = 0 ; i < OutputNodes ; i++ ) 
       {
@@ -184,9 +174,8 @@ void train_nn()
       }
       //Serial.println(Output[0]*100);
 
-      /******************************************************************
-        Backpropagate errors to hidden layer
-      ******************************************************************/
+      //Backpropagate errors to hidden layer
+    
       for ( i = 0 ; i < HiddenNodes ; i++ ) 
       {
         Accum = 0.0 ;
@@ -196,9 +185,8 @@ void train_nn()
         HiddenDelta[i] = Accum * Hidden[i] * (1.0 - Hidden[i]) ;
       }
 
-      /******************************************************************
-        Update Inner-->Hidden Weights
-      ******************************************************************/
+      //Update Inner-->Hidden Weights
+    
 
       for ( i = 0 ; i < HiddenNodes ; i++ ) 
       {
@@ -209,9 +197,9 @@ void train_nn()
           HiddenWeights[j][i] += ChangeHiddenWeights[j][i] ;
         }
       }
-      /******************************************************************
+      //
         Update Hidden-->Output Weights
-      ******************************************************************/
+    
       for ( i = 0 ; i < OutputNodes ; i ++ ) 
       {
         ChangeOutputWeights[HiddenNodes][i] = LearningRate * OutputDelta[i] + Momentum * ChangeOutputWeights[HiddenNodes][i] ;
@@ -224,9 +212,8 @@ void train_nn()
 
     }
 
-    /******************************************************************
-      Every 1000 cycles send data to terminal for display 
-    ******************************************************************/
+    //Every 1000 cycles send data to terminal for display 
+  
     ReportEvery1000 = ReportEvery1000 - 1;
     if (ReportEvery1000 == 0)
     {
@@ -246,17 +233,15 @@ void train_nn()
       else
       {
         ReportEvery1000 = 1000;
-      }
+      +}
     }
     
-    /******************************************************************
-      If error rate is less than pre-determined threshold then end
-    ******************************************************************/
+    //If error rate is less than pre-determined threshold then end
+  
     if ( Error < Success ) break ;
   }
 }
 
-//USES TRAINED NEURAL NETWORK TO DRIVE ROBOT
 void drive_nn()
 {
   Serial.println("Running NN Drive Test");
@@ -345,9 +330,8 @@ void toTerminal()
       Serial.print (Target[p][i], DEC);
       Serial.print (" ");
     }
-    /******************************************************************
-      Compute hidden layer activations
-    ******************************************************************/
+    //Compute hidden layer activations
+  
 
     for ( i = 0 ; i < HiddenNodes ; i++ ) {
       Accum = HiddenWeights[InputNodes][i] ;
@@ -359,10 +343,7 @@ void toTerminal()
       Hidden[i] = 1.0 / (1.0 + exp(-Accum)) ;
     }
 
-    /******************************************************************
-      Compute output layer activations and calculate errors
-    ******************************************************************/
-
+    //Compute output layer activations and calculate errors
     for ( i = 0 ; i < OutputNodes ; i++ ) 
     {
       Accum = OutputWeights[HiddenNodes][i] ;
@@ -391,10 +372,7 @@ void InputToOutput(float In1, float In2, float In3, float In4)
   TestInput[2] = In3;
   TestInput[3] = In4;
 
-  /******************************************************************
-    Compute hidden layer activations
-  ******************************************************************/
-
+  //Compute hidden layer activation
   for ( i = 0 ; i < HiddenNodes ; i++ ) 
   {
     Accum = HiddenWeights[InputNodes][i];
@@ -405,9 +383,8 @@ void InputToOutput(float In1, float In2, float In3, float In4)
     Hidden[i] = 1.0 / (1.0 + exp(-Accum));
   }
 
-  /******************************************************************
-    Compute output layer activations and calculate errors
-  ******************************************************************/
+  //Compute output layer activations and calculate errors
+
 
   for ( i = 0 ; i < OutputNodes ; i++ ) 
   {

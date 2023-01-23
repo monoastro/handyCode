@@ -2,15 +2,13 @@
 //activations in order; sigmoid, linear
 #include <math.h>
 
+//documentation for Saroj Sir
 //this is a project to make a neural network that can take inputs from 0 to 1 corresponding to the movement of finger joints,
 //and output a value from 0 to 1 that can be turned into an angle value from 0 to 120 degrees. Also the angle outputs serve as an
 //input for another neural network that will turn the input into 8-bit binary number that can be used to play a specific audio file index as the bcd number
 
 //#define DEBUG/
 
-/******************************************************************
-   Network Configuration - customized per network
-*******************************************************************/
 
 //for first neural network
 const int numberOfDataSet = 2; 
@@ -48,10 +46,6 @@ const float TargetTwo[numberOfDataSetTwo][outputNodesTwo] =
   {0,0,0,0,0,0,0,0},
   {1,1,1,1,1,1,1,1}
 };
-
-/******************************************************************
-   End Network Configuration
-*******************************************************************/
 
 int i, j, p;
 float Accum;
