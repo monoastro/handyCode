@@ -197,8 +197,7 @@ void train_nn()
           HiddenWeights[j][i] += ChangeHiddenWeights[j][i] ;
         }
       }
-      //
-        Update Hidden-->Output Weights
+      //Update Hidden-->Output Weights
     
       for ( i = 0 ; i < OutputNodes ; i ++ ) 
       {

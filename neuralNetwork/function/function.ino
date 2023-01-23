@@ -83,7 +83,7 @@ void driveNN()
     //[0]
     tem = analogRead(A1); 
     tem = map(tem, 350, 870, 0, 100);
-    tem = constrain(tem, 0, 100);\
+    tem = constrain(tem, 0, 100);
     TestInput[1] = double(tem)/100;
   
     //[1]
@@ -118,8 +118,7 @@ void driveNN()
     tem =  constrain(tem, 0, 100);
     TestInput[8] = double(tem)/100;
 
-    //thumb - opposite because the magnet is on the other side
-
+    //thumb
     // [0]
     tem = analogRead(A4);
     tem = map(tem, 350, 420, 100, 0);
@@ -130,8 +129,8 @@ void driveNN()
   #ifdef DEBUG
       for(i = 0; i<numberOfDataSet; i++)
       {
-        Serial.print("Input: ");
         Serial.print(TestInput[9-i], 2);
+        Serial.print("Input: ");
         Serial.print("\t");
       }
   #endif
