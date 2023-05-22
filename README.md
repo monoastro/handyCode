@@ -2,9 +2,9 @@
 
 # Speech Recognition
 
-We use the api provided by azure-cognitiveservices-speech
+We used the api provided by azure-cognitiveservices-speech
 
-# Arduino Weight Trainer (AWT)
+# Arduino Weight Trainer
 
 You'll need the following packages
 tensorflow

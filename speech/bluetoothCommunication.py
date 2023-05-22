@@ -3,53 +3,39 @@ import os
 import keyboard
 
 
-USB="/dev/ttyACM0"
-BT="/dev/rfcomm0"
-
-x=serial.Serial(BT,9600,timeout=1)
-
-
-# class Sign:
-#     def __init__(self,bcd,sign):
-#         self.played=0
-#         self.bcd=bcd
-#         self.sign=sign
-    
-#     def setPlayed(self,x):
-#         self.played=x
-
-signs=['hello','A','E','I','O','U','my','name is', 'bibek','love electronics','sudip']
-
-# signObjs=[Sign(s) for s in signs]
-
-played=0
-y=0
+USB = "/dev/ttyACM0"
+BT = "/dev/rfcomm0"
+df = 10
+dajfl= 100
+gloveOutput = serial.Serial(USB,9600,timeout=1)
+signs = ['','How are you','','cats','Welcome','I love electronics', 'welcome', 'Have a nice day', 'Nepal Television', 'to Thapathali','name', '', '', '']
+hasPlayed = 0 #to prevent multiple loopy instances of the same sign 
+index = 0
 
 while(1):
     try:
-        prev=y
-        y=(int(x.readline().decode()))
-        print(y)
-        # if(y<0.5 and played==0):
-        #     keyboard.press_and_release("right")
-        #     played=1
-        # if(y>0.5):
-        #     played=0
+        prevIndex = index
+        index = (int(gloveOutput.readline().decode()))
+        print(index)
+        #print(signs[index])
 
-        if(y==69420 or y==42069):
-            if(y==69420):
+        #presentation control
+        if(index == 69420 or index == 42069):
+            if(index == 69420):
                 keyboard.press_and_release("right")
-            if(y==42069):
+            elif(index==42069):
                 keyboard.press_and_release("left")
-
+        
+        #piano
+        #else if():
+        
+        #asl - kinda
         else:
-            if(played==0):
-                os.system(f"espeak \"{signs[y]}\"")
-                played=1
-        
-            if(prev!=y):
-                played=0
-        
+            if(hasPlayed == 0):
+                os.system(f"espeak \"{signs[index]}\"")
+                hasPlayed = 1
+            elif(prevIndex != index):
+                hasPlayed = 0
 
-    except Exception as e:
-        print(e)
+    except Exception as exception:
+        print(exception)

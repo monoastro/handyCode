@@ -1,0 +1,55 @@
+//For displaying information
+void toTerminal()
+{
+  for ( p = 0; p < numberOfDataSet; p++ )
+  {
+    Serial.println();
+    Serial.print("  Training Pattern: ");
+    Serial.println(p);
+    Serial.print ("  Input ");
+    for ( i = 0 ; i < inputNodes ; i++ )
+    {
+      Serial.print(Input[p][i], DEC);
+      Serial.print(" ");
+    }
+    Serial.print("  Target ");
+    for ( i = 0 ; i < outputNodes ; i++ )
+    {
+      Serial.print(Target[p][i], DEC);
+      Serial.print(" ");
+    }
+
+    //Compute hidden layer activations
+    for ( i = 0 ; i < hiddenNodes ; i++ )
+    {
+      Accum = HiddenWeights[inputNodes][i] ;
+      for ( j = 0 ; j < inputNodes ; j++ )
+      {
+        Accum += Input[p][j] * HiddenWeights[j][i] ;
+      }
+      //activation function
+      Hidden[i] = 1.0 / (1.0 + exp(-Accum));
+      //1.0 / (1.0 + exp(-Accum));
+    }
+
+    //Compute output layer activations and calculate errors
+    for ( i = 0 ; i < outputNodes ; i++ )
+    {
+      Accum = OutputWeights[hiddenNodes][i] ;
+      for ( j = 0 ; j < hiddenNodes ; j++ )
+      {
+        Accum += Hidden[j] * OutputWeights[j][i] ;
+      }
+
+      //linear activation
+      Output[i] = Accum ;
+    }
+
+    Serial.print("  Output ");
+    for ( i = 0 ; i < outputNodes ; i++ )
+    {
+     Serial.print(Output[i], 5);
+     Serial.print(" ");
+    }
+  }
+}

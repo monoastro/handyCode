@@ -54,16 +54,16 @@ void loop() {
     //pinky finger
     // [0]
     tem = analogRead(A3);
-    tem = map(tem, 300, 770, 0, 100);
+    tem = map(tem, 494, 800, 0, 100);
     tem = constrain(tem, 0, 100);
     TestInput[3] = double(tem)/100;
     //[1]
     tem = analogRead(A8);
-    tem = map(tem, 570, 870, 0, 100);
+    tem = map(tem, 560, 787, 0, 100);
     tem =  constrain(tem, 0, 100);
     TestInput[8] = double(tem)/100;
 
-    //thumb - opposite because the magnet is on the other side
+    //thumb
     // [0]
     tem = analogRead(A4);
     tem = map(tem, 520, 750, 0, 100);
