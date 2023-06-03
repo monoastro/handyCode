@@ -5,8 +5,7 @@ import keyboard
 
 USB = "/dev/ttyACM0"
 BT = "/dev/rfcomm0"
-df = 10
-dajfl= 100
+
 gloveOutput = serial.Serial(USB,9600,timeout=1)
 signs = ['','How are you','','cats','Welcome','I love electronics', 'welcome', 'Have a nice day', 'Nepal Television', 'to Thapathali','name', '', '', '']
 hasPlayed = 0 #to prevent multiple loopy instances of the same sign 
